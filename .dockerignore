@@ -1,0 +1,83 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Git
+.git
+.gitignore
+
+# IDEs / editors
+.idea/
+*.iml
+.vscode/
+
+# Python bytecode / caches
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+.virtualenv/
+pip-wheel-metadata/
+
+# Packaging / build artifacts
+build/
+dist/
+*.egg-info/
+wheelhouse/
+
+# Testing / coverage
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# Logs and runtime files
+*.log
+logs/
+tmp/
+*.pid
+
+# Environment / secrets
+.env
+.env.*.local
+secrets.json
+
+# Jupyter
+.ipynb_checkpoints
+*.ipynb
+
+# Model artifacts and large binaries
+models/
+*.safetensors
+*.ckpt
+*.pt
+*.bin
+*.onnx
+*.tar.gz
+*.zip
+
+# Hugging Face / model caches
+.hf/
+.cache/
+huggingface_hub/
+transformers_cache/
+hf_cache/
+
+# Node / frontend
+node_modules/
+
+# Data and datasets
+data/
+datasets/
+*.csv
+*.parquet
+
+# Docker compose override
+docker-compose.override.yml

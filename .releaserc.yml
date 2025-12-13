@@ -1,0 +1,20 @@
+---
+branches: main
+preset: "conventionalcommits"
+tagFormat: "v${version}"
+plugins:
+  - - "@semantic-release/commit-analyzer"
+    - parserOpts:
+        headerPattern: '^(\w*)(?:\((.*)\))?:? (.*)$'
+  - - "@semantic-release/release-notes-generator"
+    - preset: "conventionalcommits"
+      parserOpts:
+        headerPattern: '^(\w*)(?:\((.*)\))?:? (.*)$'
+  - "@semantic-release/changelog"
+  - - "@semantic-release/git"
+    - assets:
+        - CHANGELOG.md
+      message: "chore(release): version ${nextRelease.version}\n\n${nextRelease.notes} [release skip]"
+  - "@semantic-release/github"
+  - - "@semantic-release/exec"
+    - verifyReleaseCmd: "echo ${nextRelease.version} > VERSION"
