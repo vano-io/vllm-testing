@@ -28,8 +28,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          npm install semantic-release @semantic-release/github @semantic-release/git @semantic-release/exec @semantic-release/commit-analyzer @semantic-release/release-notes-generator @semantic-release/changelog conventional-changelog
-          npm run semantic-release --dry-run --generate-notes false
+          npm install -g semantic-release @semantic-release/github @semantic-release/git @semantic-release/exec @semantic-release/commit-analyzer @semantic-release/release-notes-generator @semantic-release/changelog conventional-changelog
+          DEBUG=semantic-release* semantic-release --dry-run --generate-notes false
           cat VERSION
           echo ::set-output name=version::$(cat VERSION)
       - name: Echo version
