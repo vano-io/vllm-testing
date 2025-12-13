@@ -10,8 +10,4 @@ COPY ${MODEL_DIR}/ /models/${MODEL_ID}/
 EXPOSE 8000
 
 # Serve baked AWQ model
-CMD ["vllm","serve","/models/Qwen/Qwen3-4B-AWQ",
-     "--served-model-name","qwen3-4b-awq",
-     "--host","0.0.0.0",
-     "--port","8000",
-     "--quantization","awq_marlin"]
+CMD ["vllm","serve","/models/Qwen/Qwen3-4B-AWQ","--served-model-name","qwen3-4b-awq","--host","0.0.0.0","--port","8000","--quantization","awq_marlin"]
