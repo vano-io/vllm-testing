@@ -98,6 +98,11 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
+      - name: Cleanup
+        run: |
+          docker system builder prune -af
+          sudo rm -rf /tmp/*
+
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
