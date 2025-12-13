@@ -100,7 +100,7 @@ jobs:
 
       - name: Cleanup
         run: |
-          docker system builder prune -af
+          docker system prune -af
           sudo rm -rf /tmp/*
 
       - name: Build and push Docker image
