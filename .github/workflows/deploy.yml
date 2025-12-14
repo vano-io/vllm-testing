@@ -63,7 +63,7 @@ jobs:
           tags: |
             ${{ env.REGISTRY_NAME }}/${{ env.IMAGE_NAME }}:latest
             ${{ env.REGISTRY_NAME }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
-            ${{ env.REGISTRY_NAME }}/${{ env.IMAGE_NAME }}:${{ needs.version.outputs.version }}
+            ${{ env.REGISTRY_NAME }}/${{ env.IMAGE_NAME }}:v${{ needs.version.outputs.version }}
   release:
     runs-on: ubuntu-latest
     steps:
