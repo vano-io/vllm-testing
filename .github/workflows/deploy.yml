@@ -1,7 +1,7 @@
 env:
   MODEL_ID: Qwen/Qwen3-4B-AWQ
   MODEL_DIR: hf-model
-  IMAGE_NAME: qwen3-4b-awq-vllm
+  IMAGE_NAME: vllm-testing
   REGISTRY: hub.docker.com
   REGISTRY_NAME: josephvano  # replace with your Docker Hub username
 
@@ -64,6 +64,19 @@ jobs:
             ${{ env.REGISTRY_NAME }}/${{ env.IMAGE_NAME }}:latest
             ${{ env.REGISTRY_NAME }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
             ${{ env.REGISTRY_NAME }}/${{ env.IMAGE_NAME }}:${{ needs.version.outputs.version }}
-          build-args: |
-            MODEL_ID=${{ env.MODEL_ID }}
-            MODEL_DIR=${{ env.MODEL_DIR }}
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Node
+        uses: actions/setup-node@v5
+        with:
+          node-version: '24'
+      - name: Capture next version for web
+        id: vars
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          npm install -g semantic-release @semantic-release/github @semantic-release/git @semantic-release/exec @semantic-release/commit-analyzer @semantic-release/release-notes-generator @semantic-release/changelog conventional-changelog conventional-changelog-conventionalcommits
+          DEBUG=semantic-release* semantic-release
