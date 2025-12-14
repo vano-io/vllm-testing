@@ -1,13 +1,13 @@
-FROM vllm/vllm-openai:latest
+FROM python:3.12-slim
 
-ARG MODEL_ID=Qwen/Qwen3-4B-AWQ
-ARG MODEL_DIR=hf-model
+RUN pip install --no-cache-dir "vllm" "huggingface_hub" "transformers"
 
-# Copy the model folder that GitHub Actions downloaded *before* the docker build
-# This bakes the weights into the image layer.
-COPY ${MODEL_DIR}/ /models/${MODEL_ID}/
+# Optional: set caches
+ENV HF_HOME=/data/models/hf \
+    HF_HUB_CACHE=/data/models/hf/hub \
+    TRANSFORMERS_CACHE=/data/models/hf/transformers \
+    VLLM_TARGET_DEVICE=cpu \
+    VLLM_USE_V1=0
 
 EXPOSE 8000
-
-# Serve baked AWQ model
-CMD ["vllm","serve","/models/Qwen/Qwen3-4B-AWQ","--served-model-name","qwen3-4b-awq","--host","0.0.0.0","--port","8000","--quantization","awq_marlin"]
+ENTRYPOINT ["vllm", "serve"]
